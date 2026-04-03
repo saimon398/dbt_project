@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: most_popular_song_per_genre
+    description: Самые популярные песни в каждом жанре
+    columns:
+      - name: primary_genre
+        description: Жанр
+        data_type: varchar(100)
+      - name: song_title
+        description: Название песни
+        data_type: varchar(100)
+      - name: artist
+        description: Исполнитель
+        data_type: varchar(100)
+      - name: total_streams_billions
+        description: Количество прослушиваний
+        data_type: numeric(10, 2)

@@ -20,7 +20,7 @@ sources:
           data_type: varchar(100)
         - name: total_streams_billions
           description: Количество прослушиваний
-          data_type: numeric(10, 2),
+          data_type: numeric(10, 2)
         - name: primary_genre
           description: Жанр
           data_type: varchar(100)
