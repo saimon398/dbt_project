@@ -1,0 +1,12 @@
+version 2:
+
+models:
+  - name: songs_per_genre
+    description: 'Количество песен, относящихся к определенному жанру'
+    columns:
+      - name: primary_genre
+        description: Жанр
+        data_type: varchar(100)
+      - name: songs_count
+        description: Количество песен
+        data_type: smallint

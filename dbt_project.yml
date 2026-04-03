@@ -14,11 +14,10 @@ clean-targets:         # директории, которые будут очи�
   - "target"
   - "dbt_packages"
 
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
+# Конфигурация моделей
+# Полная документация: https://docs.getdbt.com/docs/configuring-models
 
 models:
   dbt_project:
     # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+    +materialized: table # все модели по умолчанию материализуются в таблицы

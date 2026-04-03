@@ -1,0 +1,50 @@
+version 2:
+
+sources:
+  - name: ods
+    description: 'Данные, которые поступают из Spotify'
+    loader: https://www.kaggle.com/datasets/alitaqishah/spotify-wrapped-2025-top-songs-and-artists
+    schema: ods
+    tables:
+    - name: songs
+      description: "Топ-100 песен за все время"
+      columns:
+        - name: alltime_rank
+          description: Ранг песни
+          data_type: smallint
+        - name: song_title
+          description: varchar(100)
+          data_type: Название песни
+        - name: artist
+          description: Исполнитель
+          data_type: varchar(100)
+        - name: total_streams_billions
+          description: Количество прослушиваний
+          data_type: numeric(10, 2),
+        - name: primary_genre
+          description: Жанр
+          data_type: varchar(100)
+        - name: bpm
+          description: BPM
+          data_type: smallint
+        - name: release_year
+          description: Год выхода
+          data_type: smallint
+        - name: artist_country
+          description: Национальность исполнителя 
+          data_type: varchar(55)
+        - name: explicit
+          description: Ненормативная лексика
+          data_type: boolean
+        - name: danceability
+          description: Танцевальность, стабильность ритма
+          data_type: numeric(10, 2)
+        - name: energy
+          description: Интенсивность
+          data_type: numeric(10, 2)
+        - name: valence
+          description: Валентность 
+          data_type: numeric(10, 2)
+  
+  
+
