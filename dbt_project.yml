@@ -1,0 +1,24 @@
+name: 'dbt_project'
+version: '1.0.0'
+
+profile: 'dbt_project'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         # директории, которые будут очищаться при dbt clean
+  - "target"
+  - "dbt_packages"
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+models:
+  dbt_project:
+    # Config indicated by + and applies to all files under models/example/
+    example:
+      +materialized: view
