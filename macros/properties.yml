@@ -1,0 +1,7 @@
+version: 2
+
+macros:
+  - name: generate_schema_name
+    description: Макрос определяет, в какой схеме будут материализоваться модели
+  - name: updated_at
+    description: Макрос выводит дату и время материализации модели

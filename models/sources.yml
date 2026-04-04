@@ -8,6 +8,23 @@ sources:
     tables:
     - name: songs
       description: "Топ-100 песен за все время"
+      data_tests:
+        - unique_key: # проверяем модель на уникальность
+            arguments:
+              column_names : [
+                'alltime_rank',
+                'song_title',
+                'artist',
+                'total_streams_billions',
+                'primary_genre',
+                'bpm',
+                'release_year',
+                'artist_country',
+                'explicit',
+                'danceability',
+                'energy',
+                'valence'
+              ]
       columns:
         - name: alltime_rank
           description: Ранг песни

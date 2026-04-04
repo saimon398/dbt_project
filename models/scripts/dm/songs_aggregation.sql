@@ -3,7 +3,8 @@ select
 	s.songs_count 			 as songs_count,
 	m.artist 				 as artist,
 	m.song_title 			 as most_popular_song_title,
-	m.total_streams_billions as total_streams_billions
+	m.total_streams_billions as total_streams_billions,
+	{{ updated_at() }}
 from 
 	{{ref('songs_per_genre')}} as s
 	inner join 

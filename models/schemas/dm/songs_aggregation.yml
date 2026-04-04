@@ -3,6 +3,17 @@ version: 2
 models:
   - name: songs_aggregation
     description: 'Объединение 2-х моделей из cdm-схемы через INNER JOIN'
+    data_tests:
+      - unique_key:
+          arguments:
+            column_names: [
+              'primary_genre', 
+              'songs_count', 
+              'artist', 
+              'most_popular_song_title', 
+              'total_streams_billions', 
+              'updated_at'
+            ]
     columns:
       - name: primary_genre
         description: Жанр
@@ -19,3 +30,6 @@ models:
       - name: total_streams_billions
         description: Количество прослушиваний
         data_type: numeric(10, 2)
+      - name: updated_at
+        description: Дата и время обновления строки
+        data_type: timestamp
