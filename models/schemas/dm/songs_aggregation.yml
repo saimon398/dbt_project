@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: songs_aggregation
+    description: 'Объединение 2-х моделей из cdm-схемы через INNER JOIN'
+    columns:
+      - name: primary_genre
+        description: Жанр
+        data_type: varchar(100)
+      - name: songs_count
+        description: Количество песен
+        data_type: smallint
+      - name: artist
+        description: Исполнитель
+        data_type: varchar(100)
+      - name: most_popular_song_title
+        description: Название самой прослушиваемой песни в жанре
+        data_type: varchar(100)
+      - name: total_streams_billions
+        description: Количество прослушиваний
+        data_type: numeric(10, 2)
