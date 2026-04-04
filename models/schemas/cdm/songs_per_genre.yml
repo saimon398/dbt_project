@@ -2,7 +2,7 @@ version 2:
 
 models:
   - name: songs_per_genre
-    description: 'Количество песен, относящихся к определенному жанру'
+    description: "{{ doc('songs_per_genre') }}"
     columns:
       - name: primary_genre
         description: Жанр

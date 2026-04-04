@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: songs_aggregation
-    description: 'Объединение 2-х моделей из cdm-схемы через INNER JOIN'
+    description: "{{ doc('songs_aggregation') }}"
     data_tests:
       - unique_key:
           arguments:

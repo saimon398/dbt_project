@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: most_popular_song_per_genre
-    description: Самые популярные песни в каждом жанре
+    description: "{{ doc('most_popular_song_per_genre') }}"
     columns:
       - name: primary_genre
         description: Жанр
