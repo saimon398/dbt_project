@@ -3,6 +3,9 @@ version: 2
 models:
   - name: songs_aggregation
     description: "{{ doc('songs_aggregation') }}"
+    config:
+      contract:
+        enforced: true
     data_tests:
       - unique_key:
           arguments:
@@ -18,6 +21,8 @@ models:
       - name: primary_genre
         description: Жанр
         data_type: varchar(100)
+        data_tests:
+          - dbt_expectations.expect_column_to_exist
       - name: songs_count
         description: Количество песен
         data_type: smallint

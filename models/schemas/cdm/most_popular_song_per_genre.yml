@@ -3,6 +3,9 @@ version: 2
 models:
   - name: most_popular_song_per_genre
     description: "{{ doc('most_popular_song_per_genre') }}"
+    config:
+      contract:
+        enforced: true
     columns:
       - name: primary_genre
         description: Жанр

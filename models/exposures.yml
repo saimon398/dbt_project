@@ -1,0 +1,12 @@
+version: 2
+
+exposures:
+  - name: Songs Monitoring
+    description: Дашборд, в котором отображена основная информация по Spotify Wrapped
+    type: dashboard
+    maturity: low
+    depends_on:
+      - ref('songs_aggregation')
+    owner:
+      name: 'Marketing Analytics Team'
+      email: 'analytics@gmail.com'

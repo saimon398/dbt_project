@@ -1,3 +1,3 @@
 {% macro updated_at() %}
-    now() as updated_at
+    cast(now() as timestamp) as updated_at
 {% endmacro%}

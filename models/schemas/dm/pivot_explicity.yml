@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: pivot_explicity
+    description: Сводная таблица по странам
+    config:
+      contract: 
+        enforced: false
+    columns:
+      - name: artist_country
+        description: Страна
+        data_type: varchar(55)
+        data_tests:
+          - unique # повесили тест на уникальность поля
+          - dbt_utils.not_constant # повесили тест на неоднородность поля
+      - name: pre_false
+        description: Количество песен без ненормативной лексики
+        data_type: smallint
+      - name: pre_true
+        description: Количество песен с ненормативной лексикой
+        data_type: smallint

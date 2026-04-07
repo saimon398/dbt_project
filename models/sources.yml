@@ -8,6 +8,9 @@ sources:
     tables:
     - name: songs
       description: "Топ-100 песен за все время"
+      config:
+        contract:
+          enforced: true
       data_tests:
         - unique_key: # проверяем модель на уникальность
             arguments:
@@ -35,7 +38,7 @@ sources:
           data_tests:
             - not_null: # проверка поля на отсутствие NULL-значений
                 config:
-                  severity: warn
+                  severity: error
         - name: artist
           description: Исполнитель
           data_type: varchar(100)
