@@ -18,3 +18,4 @@
 - `dbt test --select source:ods test_type:singular`
 - `dbt docs generate`
 - `dbt docs serve`
+- `dbt deps --add-package`
