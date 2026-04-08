@@ -33,8 +33,8 @@ sources:
           description: Ранг песни
           data_type: smallint
         - name: song_title
-          description: varchar(100)
-          data_type: Название песни
+          description: Название песни
+          data_type: varchar(100)
           data_tests:
             - not_null: # проверка поля на отсутствие NULL-значений
                 config:
