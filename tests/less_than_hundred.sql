@@ -1,6 +1,5 @@
-select 
-    *
-from 
+SELECT  *
+FROM 
     {{ source('ods', 'songs') }}
-where
-    alltime_rank < 1 or alltime_rank > 100
+WHERE
+    alltime_rank < 1 OR alltime_rank > 100

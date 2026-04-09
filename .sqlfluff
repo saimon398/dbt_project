@@ -1,0 +1,16 @@
+[sqlfluff]
+dialect = postgres
+templater = dbt
+rules = AL01, CP01, CP03, LT02, LT09, LT12
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.functions]
+capitalisation_policy = upper
+
+[sqlfluff:indentation]
+tab_space_size = 4
+
+[sqlfluff:layout:type:comma]
+line_position = trailing

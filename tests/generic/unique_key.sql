@@ -2,7 +2,7 @@
     select 
         {% for column_name in column_names %}
             "{{ column_name }}"::text {% if not loop.last %} || {% endif %} 
-        {% endfor %}
+{% endfor %}
     from 
         {{ model }}
     group by 
