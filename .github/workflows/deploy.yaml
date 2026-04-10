@@ -2,6 +2,9 @@ name: DBT Project Workflow
 on:
   push:
     branches: [main]
+  
+permissions:
+  contents: write
 
 jobs:
   build:
