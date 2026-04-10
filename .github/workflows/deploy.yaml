@@ -1,0 +1,28 @@
+name: DBT Project Workflow
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: checkout repository code
+        uses: actions/checkout@v5
+
+      - name: install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable_cache: true
+
+      - name: install dependencies
+        run: uv sync --locked
+
+      - name: prepare connection profile
+        run: cp profiles.example.yml profiles.yml
+
+      - name: final_one
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}.
+
