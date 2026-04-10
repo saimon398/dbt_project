@@ -15,7 +15,7 @@ jobs:
       - name: install uv
         uses: astral-sh/setup-uv@v6
         with:
-          enable_cache: true
+          enable-cache: true
 
       - name: install dependencies
         run: uv sync --locked
@@ -23,6 +23,4 @@ jobs:
       - name: prepare connection profile
         run: cp profiles.example.yml profiles.yml
 
-      - name: final_one
-        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}.
 
