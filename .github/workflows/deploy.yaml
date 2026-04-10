@@ -24,7 +24,7 @@ jobs:
         run: cp profiles.example.yml profiles.yml
 
       - name: generate dbt docs
-        run: dbt docs generate
+        run: uv run dbt docs generate
         env:
           DBT_ENV_SECRET_NAME: ${{ secrets.DB_NAME }}
           DBT_ENV_SECRET_HOST: ${{ secrets.DB_HOST }}
