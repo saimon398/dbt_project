@@ -23,4 +23,7 @@ jobs:
       - name: prepare connection profile
         run: cp profiles.example.yml profiles.yml
 
+      - name: final
+        run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
 
