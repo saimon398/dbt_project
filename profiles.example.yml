@@ -1,12 +1,12 @@
 dbt_project:
   outputs:
     dev:
-      dbname: ${{ secrets.DB_NAME }}
-      host: ${{ secrets.DB_HOST }}
-      pass: ${{ secrets.DB_PASS }}
+      dbname: "{{ env_var('DBT_ENV_SECRET_NAME') }}"
+      host: "{{ env_var('DBT_ENV_SECRET_HOST') }}"
+      pass: "{{ env_var('DBT_ENV_SECRET_PASS') }}"
       port: 6432
       schema: dbt_objects
       threads: 4
       type: postgres
-      user: ${{ secrets.DB_USER }}
+      user: "{{ env_var('DBT_ENV_SECRET_USER') }}"
   target: dev

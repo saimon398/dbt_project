@@ -23,7 +23,12 @@ jobs:
       - name: prepare connection profile
         run: cp profiles.example.yml profiles.yml
 
-      - name: final
-        run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - name: generate dbt docs
+        run: dbt docs generate
+        env:
+          DBT_ENV_SECRET_NAME: ${{ secrets.DB_NAME }}
+          DBT_ENV_SECRET_HOST: ${{ secrets.DB_HOST }}
+          DBT_ENV_SECRET_PASS: ${{ secrets.DB_PASS }}
+          DBT_ENV_SECRET_USER: ${{ secrets.DB_USER }}
 
 
