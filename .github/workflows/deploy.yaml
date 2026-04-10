@@ -34,4 +34,17 @@ jobs:
           DBT_ENV_SECRET_PASS: ${{ secrets.DB_PASS }}
           DBT_ENV_SECRET_USER: ${{ secrets.DB_USER }}
 
+      - name: prepare site
+        run: |
+          mkdir data_catalog
+          cp target/index.html data_catalog/
+          cp target/manifest.json data_catalog/
+          cp target/catalog.json data_catalog/
+
+      - name: generage data catalog
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./data_catalog
+          publish_branch: data_catalog_branch
 
