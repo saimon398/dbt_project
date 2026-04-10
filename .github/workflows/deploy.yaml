@@ -23,6 +23,9 @@ jobs:
       - name: prepare connection profile
         run: cp profiles.example.yml profiles.yml
 
+      - name: install dbt packages
+        run: uv run dbt deps
+
       - name: generate dbt docs
         run: uv run dbt docs generate
         env:
