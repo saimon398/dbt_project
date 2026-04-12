@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: vw_trips
+    description: Поездки на самокатах (ODS-слой)
+    config:
+      materialized: view
+      contract:
+        enforced: true
+    columns:
+      - name: id
+        description: Идентификатор поездки
+        data_type: integer
+      - name: user_id
+        description: Идентификатор пользователя
+        data_type: integer
+      - name: scooter_hw_id
+        description: Идентификатор самоката
+        data_type: varchar(25)
+      - name: started_at
+        description: Дата и время начала поездки
+        data_type: timestamptz
+      - name: finished_at
+        description: Дата и время окончания поездки
+        data_type: timestamptz
+      - name: start_lat
+        description: Широта точки начала поездки
+        data_type: float8
+      - name: start_lon
+        description: Долгота точки начала поездки
+        data_type: float8
+      - name: finish_lat
+        description: Широта точки окончания поездки
+        data_type: float8
+      - name: finish_lon
+        description: Долгота точки окончания поездки
+        data_type: float8
+      - name: distance_m
+        description: Дистанция поездки в метрах
+        data_type: float8
+      - name: price_rub
+        description: Стоимость поездки в рублях
+        data_type: numeric(10, 2)
+      - name: duration_s
+        description: Продолжительность поездки в секундах
+        data_type: numeric
+      - name: is_free
+        description: Признак бесплатной поездки
+        data_type: boolean
+      - name: trip_date
+        description: Дата поездки
+        data_type: date

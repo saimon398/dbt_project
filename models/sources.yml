@@ -1,4 +1,4 @@
-version 2:
+version: 2
 
 sources:
   - name: ods
@@ -55,7 +55,7 @@ sources:
           description: Год выхода
           data_type: smallint
         - name: artist_country
-          description: Национальность исполнителя 
+          description: Национальность исполнителя
           data_type: varchar(55)
         - name: explicit
           description: Ненормативная лексика
@@ -67,8 +67,91 @@ sources:
           description: Интенсивность
           data_type: numeric(10, 2)
         - name: valence
-          description: Валентность 
+          description: Валентность
           data_type: numeric(10, 2)
-  
-  
 
+  - name: instamart
+    description: 'Данные по поездкам из Instamart'
+    loader: Instamart
+    schema: ods
+    tables:
+      - name: trips
+        description: "Данные по поездкам пользователей"
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: id
+            description: Идентификатор поездки
+            data_type: integer
+          - name: user_id
+            description: Идентификатор пользователя
+            data_type: integer
+          - name: scooter_hw_id
+            description: Идентификатор самоката
+            data_type: varchar(55)
+          - name: started_at
+            description: Время начала поездки
+            data_type: timestamptz
+          - name: finished_at
+            description: Время окончания поездки
+            data_type: timestamptz
+          - name: start_lat
+            description: Широта начала поездки
+            data_type: float8
+          - name: start_lon
+            description: Долгота начала поездки
+            data_type: float8
+          - name: finish_lat
+            description: Широта окончания поездки
+            data_type: float8
+          - name: finish_lon
+            description: Долгота окончания поездки
+            data_type: float8
+          - name: distance
+            description: Дистанция поездки
+            data_type: float8
+          - name: price
+            description: Стоимость поездки
+            data_type: numeric(10, 2)
+
+      - name: users
+        description: "Данные по пользователям"
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: id
+            description: Идентификатор пользователя
+            data_type: integer
+          - name: first_name
+            description: Имя
+            data_type: varchar(25)
+          - name: last_name
+            description: Фамилия
+            data_type: varchar(25)
+          - name: phone
+            description: Номер телефона
+            data_type: varchar(15)
+          - name: sex
+            description: Пол
+            data_type: char(1)
+          - name: birth_date
+            description: Дата рождения
+            data_type: date
+
+      - name: events
+        description: "Данные по совершаемым событиям пользователей"
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: user_id
+            description: Идентификатор пользователя
+            data_type: integer
+          - name: timestamp
+            description: Время события
+            data_type: timestamp
+          - name: type_id
+            description: Идентификатор типа события
+            data_type: smallint
