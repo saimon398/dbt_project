@@ -14,7 +14,8 @@ SELECT
     trips.is_free AS is_free,
     trips.trip_date AS trip_date,
     users.sex AS sex,
-    cast(extract('year' FROM age(trips.trip_date, users.birth_date)) AS integer) AS age
+    cast(extract('year' FROM age(trips.trip_date, users.birth_date)) AS integer) AS age,
+    {{ updated_at() }}
 FROM 
     {{ ref('vw_trips') }} AS trips 
 INNER JOIN 

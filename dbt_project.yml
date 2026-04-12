@@ -34,3 +34,5 @@ models:
         +schema: cdm
       dm:
         +schema: dm
+      service:
+        +schema: service

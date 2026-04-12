@@ -55,3 +55,6 @@ models:
       - name: age
         description: Возраст пользователя на момент поездки
         data_type: integer
+      - name: updated_at
+        description: 'Дата и время обновления записи'
+        data_type: timestamp
