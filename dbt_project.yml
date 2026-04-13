@@ -36,3 +36,6 @@ models:
         +schema: dm
       service:
         +schema: service
+seeds:
+  dbt_project:
+    schema: seeds

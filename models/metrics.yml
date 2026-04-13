@@ -1,5 +1,53 @@
 semantic_models:
 
+  # --- Семантическая модель справочника самокатов ---
+  - name: 'scooters'
+    description: 'Таблица-справочник самокатов, составляющих парк компании'
+    model: "ref('scooters')"
+
+    # --- Сущности ---
+    entities:
+      - name: 'scooter'
+        type: 'primary'
+        expr: 'hardware_id'
+
+    # --- Размерности ---
+    dimensions:
+      - name: 'company'
+        type: 'categorical'
+
+      - name: 'model'
+        type: 'categorical'
+
+      - name: 'actual_dt'
+        type: 'time'
+        expr: 'date(now())'
+        type_params:
+          time_granularity: 'day'
+
+    defaults:
+      agg_time_dimension: 'actual_dt'
+
+    # --- Показатели ---
+    measures:
+      - name: 'scooters_count'
+        description: 'Количество скутеров в парке'
+        expr: 'scooters'
+        agg: 'sum'
+        create_metric: True
+
+      - name: 'models_unique_count'
+        description: 'Количество уникальных моделей скутеров'
+        expr: 'model'
+        agg: 'count_distinct'
+        create_metric: True
+
+      - name: 'companies_unique_count'
+        description: 'Количество уникальных производителей скутеров'
+        expr: 'company'
+        agg: 'count_distinct'
+        create_metric: True
+
   # --- Семантическая модель поездок на самокатах ---
   - name: 'trips_x_users_metrics'
     description: 'Таблица фактов по поездками с данными о пользователях, которые совершали поездки'
@@ -121,3 +169,13 @@ metrics:
        - name: 'unique_users_count'
          offset_window: '1 month'
          alias: 'unique_users_count_prev'
+
+  - name: 'trips_per_scooter_ratio'
+    label: 'Trips Per Scooter'
+    description: 'Какое количество поездок пришлось на 1 скутер из парка'
+    type: 'ratio'
+    type_params:
+      numerator: 'trips_count'
+      denominator: 'scooters_count'
+
+

@@ -1,0 +1,21 @@
+version: 2
+
+seeds:
+  - name: 'scooters'
+    description: 'Информация о парке скутеров'
+    config:
+      delimiter: ','
+      column_types:
+        company: varchar(50)
+        model: varchar(50)
+        hardware_id: varchar(25)
+        scooters: smallint
+    columns:
+      - name: company
+        description: 'Производитель самоката'
+      - name: model
+        description: 'Модель самоката'
+      - name: hardware_id
+        description: 'Уникальный идентификатор модели самоката'
+      - name: scooters
+        description: 'Количество самокатов данной модели в парке'
