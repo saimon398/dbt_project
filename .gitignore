@@ -3,3 +3,5 @@ target/
 dbt_packages/
 logs/
 .pre-commit-config.yaml
+profiles.yml
+.user.yml

@@ -43,7 +43,7 @@ semantic_models:
 
       - name: 'finished_dt'
         type: 'time'
-        expr: date('finished_at')
+        expr: 'date(finished_at)'
         type_params:
           time_granularity: 'day'
 
