@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: vw_events
+    description: События пользователей (ODS-слой)
+    config:
+      materialized: view
+      contract:
+        enforced: true
+    columns:
+      - name: event_id
+        description: Идентификатор события
+        data_type: bigint
+      - name: user_id
+        description: Идентификатор пользователя
+        data_type: smallint
+      - name: event_dttm
+        description: Дата и время события
+        data_type: timestamptz
+      - name: event_type
+        description: Идентификатор типа события
+        data_type: integer

@@ -1,5 +1,86 @@
 semantic_models:
 
+  # --- Семантическая модель событий ---
+  - name: 'events'
+    description: 'Таблица фактов событий пользователей'
+    model: "ref('vw_events')"
+
+    # --- Сущности ---
+    entities:
+
+      - name: 'event'
+        type: 'primary'
+        expr: 'event_id'
+      
+      - name: 'user'
+        type: 'foreign'
+        expr: 'user_id'
+
+    # --- Размерности/Измерения ---
+    dimensions:
+
+      - name: 'event_type'
+        type: 'categorical'
+
+      - name: 'event_dt'
+        type: 'time'
+        expr: 'date(event_dttm)'
+        type_params:
+          time_granularity: 'day'
+
+    defaults:
+      agg_time_dimension: 'event_dt'
+
+    # --- Показатели/Меры ---
+    measures:
+
+      - name: 'total_events_count'
+        description: 'Количество уникальных событий'
+        expr: '1'
+        agg: 'sum'
+        create_metric: True
+
+
+  # --- Семантическая модель пользователей --- 
+  - name: 'users'
+    description: 'Таблица-хаб пользователей сервиса'
+    model: "ref('vw_users')"
+
+    # --- Сущности ---
+    entities:
+      - name: 'user'
+        type: 'primary'
+        expr: 'id'
+
+    # --- Размерности/измерения ---
+    dimensions:
+      - name: 'first_name'
+        type: 'categorical'
+
+      - name: 'last_name'
+        type: 'categorical'
+      
+      - name: 'gender'
+        type: 'categorical'
+
+      - name: 'actual_dt'
+        type: 'time'
+        expr: 'date(now())'
+        type_params:
+          time_granularity: 'day'
+
+    defaults:
+      agg_time_dimension: 'actual_dt'
+
+    # --- Показатели/Меры ---
+    measures:
+      - name: 'total_users_count'
+        description: 'Количество уникальных пользователей'
+        expr: '1'
+        agg: 'sum'
+        create_metric: True
+
+
   # --- Семантическая модель справочника самокатов ---
   - name: 'scooters'
     description: 'Таблица-справочник самокатов, составляющих парк компании'
@@ -177,5 +258,13 @@ metrics:
     type_params:
       numerator: 'trips_count'
       denominator: 'scooters_count'
+
+  - name: 'events_per_trip'
+    label: 'Events Per Trip'
+    description: 'Какое количество событий пришлось на 1 поездку пользователя'
+    type: 'ratio'
+    type_params:
+      numerator: 'total_events_count'
+      denominator: 'trips_count'
 
 

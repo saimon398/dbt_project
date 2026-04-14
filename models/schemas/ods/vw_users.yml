@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: vw_users
+    description: Пользователи (ODS-слой)
+    config:
+      materialized: view
+      contract:
+        enforced: true
+    columns:
+      - name: id
+        description: Идентификатор пользователя
+        data_type: smallint
+      - name: first_name
+        description: Имя пользователя
+        data_type: varchar(25)
+      - name: last_name
+        description: Фамилия пользователя
+        data_type: varchar(25)
+      - name: phone
+        description: Номер телефона пользователя (без знака +)
+        data_type: varchar(11)
+      - name: gender
+        description: Пол пользователя
+        data_type: char(1)
+      - name: birth_date
+        description: Дата рождения пользователя
+        data_type: date
