@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: h_subscription
+    description: "{{ doc('h_subscription') }}"
+    config:
+      materialized: incremental
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: subscription_id
+        description: ID подписки
+        data_type: varchar
+      - name: subscription_src_id
+        description: ID подписки из источника
+        data_type: varchar
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz

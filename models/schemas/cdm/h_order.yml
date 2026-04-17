@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: h_order 
+    description: "{{ doc('h_order') }}"
+    config:
+      materialized: incremental
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: order_id
+        description: ID заказа
+        data_type: varchar
+      - name: order_src_id
+        description: ID заказа из источника
+        data_type: varchar
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz

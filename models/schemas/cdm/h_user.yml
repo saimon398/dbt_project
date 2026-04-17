@@ -1,0 +1,23 @@
+version: 2
+
+models: 
+  - name: h_user
+    description: "{{ doc('h_user') }}"
+    config:
+      materialized: incremental
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: user_id
+        description: ID-пользователя
+        data_type: varchar
+      - name: user_src_id
+        description: ID-пользователя из источника
+        data_type: varchar(10)
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar(7)
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz

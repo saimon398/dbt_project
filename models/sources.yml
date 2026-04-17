@@ -7,7 +7,7 @@ sources:
     schema: ods
     tables:
     - name: songs
-      description: "Топ-100 песен за все время"
+      description: 'Топ-100 песен за все время'
       config:
         contract:
           enforced: true
@@ -30,44 +30,44 @@ sources:
               ]
       columns:
         - name: alltime_rank
-          description: Ранг песни
+          description: 'Ранг песни'
           data_type: smallint
         - name: song_title
-          description: Название песни
+          description: 'Название песни'
           data_type: varchar(100)
           data_tests:
             - not_null: # проверка поля на отсутствие NULL-значений
                 config:
                   severity: error
         - name: artist
-          description: Исполнитель
+          description: 'Исполнитель'
           data_type: varchar(100)
         - name: total_streams_billions
-          description: Количество прослушиваний
+          description: 'Количество прослушиваний'
           data_type: numeric(10, 2)
         - name: primary_genre
-          description: Жанр
+          description: 'Жанр'
           data_type: varchar(100)
         - name: bpm
-          description: BPM
+          description: 'BPM'
           data_type: smallint
         - name: release_year
-          description: Год выхода
+          description: 'Год выхода'
           data_type: smallint
         - name: artist_country
-          description: Национальность исполнителя
+          description: 'Национальность исполнителя'
           data_type: varchar(55)
         - name: explicit
-          description: Ненормативная лексика
+          description: 'Ненормативная лексика'
           data_type: boolean
         - name: danceability
-          description: Танцевальность, стабильность ритма
+          description: 'Танцевальность, стабильность ритма'
           data_type: numeric(10, 2)
         - name: energy
-          description: Интенсивность
+          description: 'Интенсивность'
           data_type: numeric(10, 2)
         - name: valence
-          description: Валентность
+          description: 'Валентность'
           data_type: numeric(10, 2)
 
   - name: instamart
@@ -76,82 +76,210 @@ sources:
     schema: ods
     tables:
       - name: trips
-        description: "Данные по поездкам пользователей"
+        description: 'Данные по поездкам пользователей'
         config:
           contract:
             enforced: true
         columns:
           - name: id
-            description: Идентификатор поездки
+            description: 'Идентификатор поездки'
             data_type: integer
           - name: user_id
-            description: Идентификатор пользователя
+            description: 'Идентификатор пользователя'
             data_type: integer
           - name: scooter_hw_id
-            description: Идентификатор самоката
+            description: 'Идентификатор самоката'
             data_type: varchar(55)
           - name: started_at
-            description: Время начала поездки
+            description: 'Время начала поездки'
             data_type: timestamptz
           - name: finished_at
-            description: Время окончания поездки
+            description: 'Время окончания поездки'
             data_type: timestamptz
           - name: start_lat
-            description: Широта начала поездки
+            description: 'Широта начала поездки'
             data_type: float8
           - name: start_lon
-            description: Долгота начала поездки
+            description: 'Долгота начала поездки'
             data_type: float8
           - name: finish_lat
-            description: Широта окончания поездки
+            description: 'Широта окончания поездки'
             data_type: float8
           - name: finish_lon
-            description: Долгота окончания поездки
+            description: 'Долгота окончания поездки'
             data_type: float8
           - name: distance
-            description: Дистанция поездки
+            description: 'Дистанция поездки'
             data_type: float8
           - name: price
-            description: Стоимость поездки
+            description: 'Стоимость поездки'
             data_type: numeric(10, 2)
-
+            
       - name: users
-        description: "Данные по пользователям"
+        description: 'Данные по пользователям'
         config:
           contract:
             enforced: true
         columns:
           - name: id
-            description: Идентификатор пользователя
+            description: 'Идентификатор пользователя'
             data_type: integer
           - name: first_name
-            description: Имя
+            description: 'Имя'
             data_type: varchar(25)
           - name: last_name
-            description: Фамилия
+            description: 'Фамилия'
             data_type: varchar(25)
           - name: phone
-            description: Номер телефона
+            description: 'Номер телефона'
             data_type: varchar(15)
           - name: sex
-            description: Пол
+            description: 'Пол'
             data_type: char(1)
           - name: birth_date
-            description: Дата рождения
+            description: 'Дата рождения'
             data_type: date
 
       - name: events
-        description: "Данные по совершаемым событиям пользователей"
+        description: 'Данные по совершаемым событиям пользователей'
         config:
           contract:
             enforced: true
         columns:
           - name: user_id
-            description: Идентификатор пользователя
+            description: 'Идентификатор пользователя'
             data_type: integer
           - name: timestamp
-            description: Время события
+            description: 'Время события'
             data_type: timestamp
           - name: type_id
-            description: Идентификатор типа события
+            description: 'Идентификатор типа события'
             data_type: smallint
+
+  # --- Источник 3 ---
+  - name: 'paas_content_demand__mindbox'
+    description: 'Сервис Mindbox'
+    schema: paas_content_demand__mindbox
+    tables:
+      - name: spree_users
+        description: 'Таблица с пользователями'
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: crm_user_id
+            description: 'ID пользователя'
+            data_type: varchar(5)
+          - name: first_name
+            description: 'Имя'
+            data_type: varchar(25)
+          - name: last_name
+            description: 'Фамилия'
+            data_type: varchar(25)
+          - name: email
+            description: 'Email пользователя'
+            data_type: varchar(100)
+          - name: phone
+            description: 'Номер телефона'
+            data_type: varchar(15)
+          - name: created_at
+            description: 'Дата создания записи'
+            data_type: timestamp
+          - name: valid_from
+            description: 'Дата начала актуальности записи'
+            data_type: timestamp
+          - name: valid_to
+            description: 'Дата окончания актуальности записи'
+            data_type: timestamp
+
+      - name: spree_orders
+        description: 'Таблица с заказами'
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: order_id
+            description: 'ID заказа'
+            data_type: varchar(36)
+          - name: order_price
+            description: 'Стоимость заказа'
+            data_type: numeric(10, 2)
+          - name: order_created_dttm
+            description: 'Дата и время создания заказа'
+            data_type: timestamp
+          - name: order_shipped_dttm
+            description: 'Дата и время отгрузки заказа'
+            data_type: timestamp
+          - name: shipment_type
+            description: 'Тип доставки'
+            data_type: varchar(50)
+          - name: customer_id
+            description: 'ID покупателя'
+            data_type: varchar(5)
+          - name: retailer_code
+            description: 'Код ритейлера'
+            data_type: varchar(20)
+          - name: retailer_name
+            description: 'Название ритейлера'
+            data_type: varchar(100)
+          - name: retailer_type
+            description: 'Тип ритейлера'
+            data_type: varchar(50)
+          - name: courier_id
+            description: 'ID курьера'
+            data_type: varchar(5)
+
+  - name: 'paas_content_demand__shopper'
+    description: 'Сервис Shopper'
+    schema: paas_content_demand__shopper
+    tables:
+      - name: spree_couriers
+        description: 'Таблица с курьерами'
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: courier_id
+            description: 'ID курьера'
+            data_type: varchar(5)
+          - name: first_name
+            description: 'Имя'
+            data_type: varchar(25)
+          - name: last_name
+            description: 'Фамилия'
+            data_type: varchar(25)
+          - name: courier_type
+            description: 'Тип курьера'
+            data_type: varchar(50)
+          - name: hired_at
+            description: 'Дата найма'
+            data_type: timestamp
+          - name: is_active
+            description: 'Признак активности курьера'
+            data_type: boolean
+
+  - name: 'paas_content_demand__loyalty'
+    description: 'Сервис лояльности'
+    schema: paas_content_demand__loyalty
+    tables:
+      - name: loyalty_subscriptions
+        description: 'Таблица с программами лояльности пользователей'
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: crm_subscription_id
+            description: 'ID пользовательской подписки'
+            data_type: varchar(5)
+          - name: crm_user_id
+            description: 'ID пользователя'
+            data_type: varchar(5)
+          - name: subscription_type
+            description: 'Тип подписки'
+            data_type: varchar(10)
+          - name: started_at
+            description: 'Дата начала подписки'
+            data_type: timestamp
+          - name: is_active
+            description: 'Признак активности подписки'
+            data_type: boolean

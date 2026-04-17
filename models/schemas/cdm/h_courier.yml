@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: h_courier
+    description: "{{ doc('h_courier') }}"
+    config:
+      materialized: incremental
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: courier_id
+        description: ID курьера
+        data_type: varchar
+      - name: courier_src_id
+        description: ID курьера из источника
+        data_type: varchar
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz
