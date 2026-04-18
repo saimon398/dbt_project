@@ -12,6 +12,9 @@ models:
       - name: link_id
         description: Суррогатный ключ связи пользователя и заказа
         data_type: varchar
+        data_tests:
+          - unique
+          - not_null
       - name: user_id
         description: ID пользователя
         data_type: varchar

@@ -12,6 +12,9 @@ models:
       - name: subscription_id
         description: ID подписки
         data_type: varchar
+        data_tests:
+          - unique
+          - not_null
       - name: subscription_src_id
         description: ID подписки из источника
         data_type: varchar

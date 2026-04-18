@@ -12,6 +12,9 @@ models:
       - name: retailer_id
         description: ID ритейлера
         data_type: varchar
+        data_tests:
+          - unique
+          - not_null
       - name: retailer_src_id
         description: ID ритейлера из источника
         data_type: varchar

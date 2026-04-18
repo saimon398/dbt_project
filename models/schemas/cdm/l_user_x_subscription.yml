@@ -12,6 +12,9 @@ models:
       - name: link_id
         description: Суррогатный ключ связи пользователя и подписки
         data_type: varchar
+        data_tests:
+          - unique
+          - not_null
       - name: subscription_id
         description: ID подписки
         data_type: varchar

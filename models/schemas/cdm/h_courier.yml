@@ -12,6 +12,9 @@ models:
       - name: courier_id
         description: ID курьера
         data_type: varchar
+        data_tests:
+          - unique
+          - not_null
       - name: courier_src_id
         description: ID курьера из источника
         data_type: varchar

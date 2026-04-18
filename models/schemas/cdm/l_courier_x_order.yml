@@ -12,6 +12,9 @@ models:
       - name: link_id
         description: Суррогатный ключ связи курьера и заказа
         data_type: varchar
+        data_tests:
+          - unique
+          - not_null
       - name: courier_id
         description: ID курьера
         data_type: varchar

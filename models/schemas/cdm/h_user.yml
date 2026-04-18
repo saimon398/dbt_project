@@ -12,6 +12,9 @@ models:
       - name: user_id
         description: ID-пользователя
         data_type: varchar
+        data_tests:
+          - unique
+          - not_null
       - name: user_src_id
         description: ID-пользователя из источника
         data_type: varchar
