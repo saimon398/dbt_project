@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: l_courier_x_order
+    description: "{{ doc('l_courier_x_order') }}"
+    config:
+      materialized: incremental
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: link_id
+        description: Суррогатный ключ связи курьера и заказа
+        data_type: varchar
+      - name: courier_id
+        description: ID курьера
+        data_type: varchar
+      - name: order_id
+        description: ID заказа
+        data_type: varchar
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz

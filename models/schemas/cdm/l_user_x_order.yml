@@ -1,19 +1,22 @@
 version: 2
 
-models: 
-  - name: h_user
-    description: "{{ doc('h_user') }}"
+models:
+  - name: l_user_x_order
+    description: "{{ doc('l_user_x_order') }}"
     config:
       materialized: incremental
       on_schema_change: fail
       contract:
         enforced: true
     columns:
-      - name: user_id
-        description: ID-пользователя
+      - name: link_id
+        description: Суррогатный ключ связи пользователя и заказа
         data_type: varchar
-      - name: user_src_id
-        description: ID-пользователя из источника
+      - name: user_id
+        description: ID пользователя
+        data_type: varchar
+      - name: order_id
+        description: ID заказа
         data_type: varchar
       - name: mt_src_id
         description: Название источника

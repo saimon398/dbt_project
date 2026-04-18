@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: l_user_x_subscription
+    description: "{{ doc('l_user_x_subscription') }}"
+    config:
+      materialized: incremental
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: link_id
+        description: Суррогатный ключ связи пользователя и подписки
+        data_type: varchar
+      - name: subscription_id
+        description: ID подписки
+        data_type: varchar
+      - name: user_id
+        description: ID пользователя
+        data_type: varchar
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz
