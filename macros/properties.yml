@@ -5,3 +5,5 @@ macros:
     description: Макрос определяет, в какой схеме будут материализоваться модели
   - name: updated_at
     description: Макрос выводит дату и время материализации модели
+  - name: mt_valid_to_dttm
+    description: Макрос выводит дату для SCD2
