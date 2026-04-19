@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: s_retailer
+    description: "{{ doc('s_retailer') }}"
+    config:
+      materialized: scd_materialization
+      hub_hash_key: 'retailer_id'
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: retailer_id
+        description: Суррогатный ключ ритейлера (MD5 от retailer_code источника)
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: retailer_name
+        description: Название ритейлера
+        data_type: varchar
+      - name: retailer_type
+        description: Тип ритейлера
+        data_type: varchar
+      - name: mt_hash_diff
+        description: Хэш атрибутов записи для отслеживания изменений
+        data_type: varchar
+      - name: mt_valid_from_dttm
+        description: Дата начала актуальности записи
+        data_type: timestamptz
+      - name: mt_valid_to_dttm
+        description: Дата окончания актуальности записи
+        data_type: timestamptz
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz
+      - name: mt_active_flg
+        description: Признак актуальности записи
+        data_type: boolean
+      - name: mt_deleted_flg
+        description: Признак удалённой записи
+        data_type: boolean
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar

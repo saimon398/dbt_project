@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: s_subscription
+    description: "{{ doc('s_subscription') }}"
+    config:
+      materialized: scd_materialization
+      hub_hash_key: 'subscription_id'
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: subscription_id
+        description: Суррогатный ключ подписки (MD5 от crm_subscription_id источника)
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: subscription_type
+        description: Тип подписки
+        data_type: varchar
+      - name: mt_hash_diff
+        description: Хэш атрибутов записи для отслеживания изменений
+        data_type: varchar
+      - name: mt_valid_from_dttm
+        description: Дата начала актуальности записи
+        data_type: timestamptz
+      - name: mt_valid_to_dttm
+        description: Дата окончания актуальности записи
+        data_type: timestamptz
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz
+      - name: mt_active_flg
+        description: Признак актуальности записи
+        data_type: boolean
+      - name: mt_deleted_flg
+        description: Признак удалённой записи
+        data_type: boolean
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar
