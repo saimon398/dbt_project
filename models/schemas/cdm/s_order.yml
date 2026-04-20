@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: s_order
+    description: "{{ doc('s_order') }}"
+    config:
+      materialized: scd_materialization
+      hub_hash_key: 'order_id'
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: order_id
+        description: Суррогатный ключ заказа (MD5 от order_id источника)
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: order_price
+        description: Стоимость заказа
+        data_type: numeric
+      - name: order_created_dttm
+        description: Дата и время создания заказа
+        data_type: timestamptz
+      - name: order_shipped_dttm
+        description: Дата и время отгрузки заказа
+        data_type: timestamptz
+      - name: shipment_type
+        description: Тип доставки
+        data_type: varchar
+      - name: mt_hash_diff
+        description: Хэш атрибутов записи для отслеживания изменений
+        data_type: varchar
+      - name: mt_valid_from_dttm
+        description: Дата начала актуальности записи
+        data_type: timestamptz
+      - name: mt_valid_to_dttm
+        description: Дата окончания актуальности записи
+        data_type: timestamp
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz
+      - name: mt_active_flg
+        description: Признак актуальности записи
+        data_type: boolean
+      - name: mt_deleted_flg
+        description: Признак удалённой записи
+        data_type: boolean
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar

@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: s_user
+    description: "{{ doc('s_user') }}"
+    config:
+      materialized: scd_materialization
+      hub_hash_key: 'user_id'
+      on_schema_change: fail
+      contract:
+        enforced: true
+    columns:
+      - name: user_id
+        description: Суррогатный ключ пользователя (MD5 от crm_user_id источника)
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: user_first_name
+        description: Имя пользователя
+        data_type: varchar
+      - name: user_last_name
+        description: Фамилия пользователя
+        data_type: varchar
+      - name: user_email
+        description: Email пользователя
+        data_type: varchar
+      - name: user_phone
+        description: Телефон пользователя
+        data_type: varchar
+      - name: mt_hash_diff
+        description: Хэш атрибутов записи для отслеживания изменений
+        data_type: varchar
+      - name: mt_valid_from_dttm
+        description: Дата начала актуальности записи (берётся из источника)
+        data_type: timestamp
+      - name: mt_valid_to_dttm
+        description: Дата окончания актуальности записи
+        data_type: timestamptz
+      - name: mt_load_dttm
+        description: Дата загрузки
+        data_type: timestamptz
+      - name: mt_active_flg
+        description: Признак актуальности записи
+        data_type: boolean
+      - name: mt_deleted_flg
+        description: Признак удалённой записи
+        data_type: boolean
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar

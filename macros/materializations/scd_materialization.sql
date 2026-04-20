@@ -33,7 +33,6 @@
                 {{ temp_relation }}
         {% endcall %}
 
-
     -- это инкрементальный запуск
     {% else  %}
 
@@ -55,10 +54,25 @@
                 ) as existing_mod
                 on 
                 org.{{ hub_hash_key }} = existing_mod.{{ hub_hash_key }}
-            where 
-                existing_mod.{{ hub_hash_key }} is null -- вставляем только те, которых еще не было
-                or 
-                org.mt_hash_diff != existing_mod.mt_hash_diff -- или те, у которых не равные ключи
+            where
+                1=1
+                and 
+                (
+                    existing_mod.{{ hub_hash_key }} is null -- вставляем только те, которых еще не было
+                    or
+                    org.mt_hash_diff != existing_mod.mt_hash_diff -- или те, у которых не равные ключи
+                )
+                and not exists 
+                ( -- но не вставляем, если такой хэш уже есть в таргете (даже неактивный)
+                    select
+                        1
+                    from 
+                        {{ target_relation }} as already_seen
+                    where
+                        1=1
+                        and already_seen.{{ hub_hash_key }} = org.{{ hub_hash_key }}
+                        and already_seen.mt_hash_diff = org.mt_hash_diff
+                )
         
         {% endcall %}
 
@@ -67,8 +81,7 @@
             update {{ target_relation }} as old_version_relation
             set
                 mt_valid_to_dttm = new_version_relation.mt_valid_from_dttm,
-                mt_active_flg = false,
-                mt_deleted_flg = true
+                mt_active_flg = false
             from
                 {{ target_relation }} as new_version_relation
             where
