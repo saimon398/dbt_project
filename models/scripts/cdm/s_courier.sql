@@ -1,3 +1,5 @@
+-- depends_on: {{ ref("h_courier") }}
+
 SELECT DISTINCT
     cast(md5(upper(trim(courier_id))) AS varchar) AS courier_id,
     cast(first_name AS varchar)					  AS courier_first_name,

@@ -1,3 +1,6 @@
+-- depends_on: {{ ref("h_courier") }}
+-- depends_on: {{ ref("h_order") }}
+
 SELECT DISTINCT
     cast(md5(
         upper(trim(org.courier_id)) || '||' || upper(trim(org.order_id))

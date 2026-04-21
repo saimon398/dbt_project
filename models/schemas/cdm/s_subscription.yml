@@ -18,6 +18,9 @@ models:
       - name: subscription_type
         description: Тип подписки
         data_type: varchar
+      - name: started_at
+        description: Дата и время начала действия подписки
+        data_type: timestamptz
       - name: mt_hash_diff
         description: Хэш атрибутов записи для отслеживания изменений
         data_type: varchar

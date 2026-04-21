@@ -1,3 +1,6 @@
+-- depends_on: {{ ref("h_user") }}
+-- depends_on: {{ ref("h_subscription") }}
+
 SELECT DISTINCT
     cast(md5(
         upper(trim(org.crm_subscription_id)) || '||' || upper(trim(org.crm_user_id))
