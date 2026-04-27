@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: bi__shipments
+    description: "{{ doc('bi__shipments') }}"
+    config:
+      materialized: batch_materialization
+      column_name: order_id
+      batch_count: 8
+      contract:
+        enforced: true
+    columns:
+      - name: order_id
+        description: ID заказа
+        data_type: varchar
+        data_tests:
+          - unique
+      - name: order_price
+        description: Стоимость заказа
+        data_type: numeric(10, 2)
+      - name: order_created_dttm
+        description: Дата и время создания заказа
+        data_type: timestamptz
+      - name: order_shipped_dttm
+        description: Дата и время отгрузки заказа
+        data_type: timestamptz
+      - name: order_shipment_type
+        description: Тип доставки заказа
+        data_type: varchar
+      - name: retailer_id
+        description: ID ритейлера
+        data_type: varchar
+      - name: retailer_name
+        description: Название ритейлера
+        data_type: varchar
+      - name: retailer_type
+        description: Тип ритейлера
+        data_type: varchar
+      - name: user_id
+        description: ID пользователя
+        data_type: varchar
+      - name: user_first_name
+        description: Имя пользователя
+        data_type: varchar
+      - name: user_last_name
+        description: Фамилия пользователя
+        data_type: varchar
+      - name: user_email
+        description: Email пользователя
+        data_type: varchar
+      - name: courier_id
+        description: ID курьера
+        data_type: varchar
+      - name: courier_type
+        description: Тип курьера
+        data_type: varchar

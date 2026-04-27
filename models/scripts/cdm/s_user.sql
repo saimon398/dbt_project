@@ -13,7 +13,7 @@ SELECT DISTINCT
         coalesce(phone, '')
     ) AS varchar) 						 		   AS mt_hash_diff,
     cast(valid_from AS timestamptz)				   AS mt_valid_from_dttm,
-    null			                               AS mt_valid_to_dttm,
+    cast(null AS timestamptz)                      AS mt_valid_to_dttm,
     cast(now() AS timestamptz)					   AS mt_load_dttm,
     true 										   AS mt_active_flg,
     false 										   AS mt_deleted_flg,

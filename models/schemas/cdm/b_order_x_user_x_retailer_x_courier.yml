@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: b_order_x_user_x_retailer_x_courier
+    description: "{{ doc('b_order_x_user_x_retailer_x_courier') }}"
+    config:
+      materialized: incremental
+      on_schema_change: fail
+      tags: ['business_vault', 'bridge']
+      contract:
+        enforced: true
+    columns:
+      - name: bridge_link_id
+        description: ID-связи между ключами
+        data_type: varchar
+        data_tests:
+          - unique
+      - name: order_id
+        description: ID-заказа
+        data_type: varchar
+      - name: user_id
+        description: ID-пользователя
+        data_type: varchar
+      - name: retailer_id
+        description: ID-ритейлера
+        data_type: varchar
+      - name: courier_id
+        description: ID-курьера
+        data_type: varchar
+      - name: mt_load_dttm
+        description: Дата и время загрузки данных в таблицу
+        data_type: timestamptz
+      - name: mt_src_id
+        description: Название источника
+        data_type: varchar

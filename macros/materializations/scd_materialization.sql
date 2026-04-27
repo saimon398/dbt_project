@@ -7,7 +7,7 @@
     {% set existing_relation = load_relation(this) %}
     {% set temp_relation = make_temp_relation(target_relation) %}
 
-    {# run_hooks(pre_hooks) #}
+    {{ run_hooks(pre_hooks) }}
 
     -- создаем временную таблицу и наполняем ее данными
     {% call statement('main') %}
@@ -93,6 +93,8 @@
 
         {% endcall %}
 
+        {# нам еще здесь нужно сделать закрытие удаленных в источнике записей #}
+
     {% endif %}
 
     -- удаляем временную таблицу
@@ -100,12 +102,11 @@
         drop table if exists {{ temp_relation }}
     {% endcall %}
 
-    {# run_hooks(post_hooks) #}
+    {{ run_hooks(post_hooks) }}
 
     -- обязательно закоммитить транзакцию иначе произойдет ROLLBACK на стороне DBT
     {{ adapter.commit() }}
 
     {{ return({'relations' : [target_relation]}) }}
 
-    
 {% endmaterialization %}

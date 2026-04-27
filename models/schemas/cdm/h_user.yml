@@ -4,6 +4,7 @@ models:
   - name: h_user
     description: "{{ doc('h_user') }}"
     config:
+      tags: ['data_vault', 'hub']
       materialized: incremental
       on_schema_change: fail
       contract:

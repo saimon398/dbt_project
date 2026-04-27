@@ -9,12 +9,18 @@ models:
       on_schema_change: fail
       contract:
         enforced: true
+    data_tests:
+      - unique_key:
+          arguments:
+            column_names: ['courier_id', 'mt_valid_from_dttm']
+          severity: warn
     columns:
       - name: courier_id
         description: Суррогатный ключ курьера (MD5 от courier_id источника)
         data_type: varchar
         data_tests:
           - not_null
+          - duplicates_active_rows_check
       - name: courier_first_name
         description: Имя курьера
         data_type: varchar

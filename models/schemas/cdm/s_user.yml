@@ -9,12 +9,18 @@ models:
       on_schema_change: fail
       contract:
         enforced: true
+    data_tests:
+      - unique_key:
+          arguments:
+            column_names: ['user_id', 'mt_valid_from_dttm']
+          severity: warn
     columns:
       - name: user_id
         description: Суррогатный ключ пользователя (MD5 от crm_user_id источника)
         data_type: varchar
         data_tests:
           - not_null
+          - duplicates_active_rows_check
       - name: user_first_name
         description: Имя пользователя
         data_type: varchar

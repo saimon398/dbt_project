@@ -9,12 +9,18 @@ models:
       on_schema_change: fail
       contract:
         enforced: true
+    data_tests:
+      - unique_key:
+          arguments:
+            column_names: ['order_id', 'mt_valid_from_dttm']
+          severity: warn
     columns:
       - name: order_id
         description: Суррогатный ключ заказа (MD5 от order_id источника)
         data_type: varchar
         data_tests:
           - not_null
+          - duplicates_active_rows_check
       - name: order_price
         description: Стоимость заказа
         data_type: numeric

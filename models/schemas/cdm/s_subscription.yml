@@ -9,12 +9,18 @@ models:
       on_schema_change: fail
       contract:
         enforced: true
+    data_tests:
+      - unique_key:
+          arguments: 
+            column_names: ['subscription_id', 'mt_valid_from_dttm']
+          severity: warn
     columns:
       - name: subscription_id
         description: Суррогатный ключ подписки (MD5 от crm_subscription_id источника)
         data_type: varchar
         data_tests:
           - not_null
+          - duplicates_active_rows_check
       - name: subscription_type
         description: Тип подписки
         data_type: varchar
