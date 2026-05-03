@@ -93,7 +93,25 @@
 
         {% endcall %}
 
-        {# нам еще здесь нужно сделать закрытие удаленных в источнике записей #}
+        -- закрываем записи, удаленные из источника
+        {% call statement('close_deleted_rows') %}
+            update {{ target_relation }} as target
+            set
+                mt_valid_to_dttm = current_timestamp,
+                mt_active_flg = false,
+                mt_deleted_flg = true
+            where
+                1=1
+                and target.mt_active_flg is true
+                and not exists (
+                    select
+                        1
+                    from
+                        {{ temp_relation }} as src
+                    where
+                        src.{{ hub_hash_key }} = target.{{ hub_hash_key }}
+                )
+        {% endcall %}
 
     {% endif %}
 
