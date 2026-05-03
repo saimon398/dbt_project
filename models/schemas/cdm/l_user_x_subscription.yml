@@ -18,9 +18,19 @@ models:
       - name: subscription_id
         description: ID подписки
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_subscription')
+                field: subscription_id
       - name: user_id
         description: ID пользователя
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_user')
+                field: user_id
       - name: mt_src_id
         description: Название источника
         data_type: varchar

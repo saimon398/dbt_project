@@ -18,9 +18,19 @@ models:
       - name: user_id
         description: ID пользователя
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_user')
+                field: user_id
       - name: order_id
         description: ID заказа
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_order')
+                field: 'order_id'
       - name: mt_src_id
         description: Название источника
         data_type: varchar

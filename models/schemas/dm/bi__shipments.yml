@@ -9,6 +9,9 @@ models:
       batch_count: 8
       contract:
         enforced: true
+    data_tests:
+      - dbt_expectations.expect_table_row_count_to_equal_other_table: # количество строк должно совпадать с главным источником
+          compare_model: ref('b_order_x_user_x_retailer_x_courier')
     columns:
       - name: order_id
         description: ID заказа
@@ -30,6 +33,8 @@ models:
       - name: retailer_id
         description: ID ритейлера
         data_type: varchar
+        data_tests:
+          - not_null
       - name: retailer_name
         description: Название ритейлера
         data_type: varchar
@@ -39,6 +44,8 @@ models:
       - name: user_id
         description: ID пользователя
         data_type: varchar
+        data_tests:
+          - not_null
       - name: user_first_name
         description: Имя пользователя
         data_type: varchar
@@ -51,6 +58,8 @@ models:
       - name: courier_id
         description: ID курьера
         data_type: varchar
+        data_tests:
+          - not_null
       - name: courier_type
         description: Тип курьера
         data_type: varchar

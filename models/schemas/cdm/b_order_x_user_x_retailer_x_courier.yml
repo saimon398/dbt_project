@@ -18,12 +18,27 @@ models:
       - name: order_id
         description: ID-заказа
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_order')
+                field: order_id
       - name: user_id
         description: ID-пользователя
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_user')
+                field: user_id
       - name: retailer_id
         description: ID-ритейлера
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_retailer')
+                field: retailer_id
       - name: courier_id
         description: ID-курьера
         data_type: varchar

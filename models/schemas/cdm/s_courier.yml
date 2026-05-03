@@ -10,10 +10,14 @@ models:
       contract:
         enforced: true
     data_tests:
-      - unique_key:
+      - unique_key: # проверка на то, что PK сателлита - уникальный
           arguments:
             column_names: ['courier_id', 'mt_valid_from_dttm']
           severity: warn
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B: # проверка на валидность дат действия строки
+          column_A: mt_valid_to_dttm
+          column_B: mt_valid_from_dttm
+          or_equal: True
     columns:
       - name: courier_id
         description: Суррогатный ключ курьера (MD5 от courier_id источника)
@@ -21,6 +25,12 @@ models:
         data_tests:
           - not_null
           - duplicates_active_rows_check
+          - relationships:
+              arguments:
+                to: ref('h_courier')
+                field: courier_id
+              config:
+                where: 'mt_deleted_flg = false'
       - name: courier_first_name
         description: Имя курьера
         data_type: varchar

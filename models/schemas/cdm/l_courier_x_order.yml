@@ -18,9 +18,19 @@ models:
       - name: courier_id
         description: ID курьера
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_courier')
+                field: courier_id
       - name: order_id
         description: ID заказа
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_order')
+                field: order_id
       - name: mt_src_id
         description: Название источника
         data_type: varchar

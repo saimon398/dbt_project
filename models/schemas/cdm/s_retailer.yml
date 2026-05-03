@@ -14,6 +14,10 @@ models:
           arguments:
             column_names: ['retailer_id', 'mt_valid_from_dttm']
           severity: warn
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+          column_A: mt_valid_to_dttm
+          column_B: mt_valid_from_dttm
+          or_equal: True
     columns:
       - name: retailer_id
         description: Суррогатный ключ ритейлера (MD5 от retailer_code источника)
@@ -21,6 +25,12 @@ models:
         data_tests:
           - not_null
           - duplicates_active_rows_check
+          - relationships:
+              arguments:
+                to: ref('h_retailer')
+                field: retailer_id
+              config:
+                where: 'mt_deleted_flg = false'
       - name: retailer_name
         description: Название ритейлера
         data_type: varchar
