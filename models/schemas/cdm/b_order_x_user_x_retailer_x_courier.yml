@@ -42,6 +42,11 @@ models:
       - name: courier_id
         description: ID-курьера
         data_type: varchar
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('h_courier')
+                field: courier_id
       - name: mt_load_dttm
         description: Дата и время загрузки данных в таблицу
         data_type: timestamptz

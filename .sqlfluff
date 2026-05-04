@@ -7,7 +7,7 @@ rules = AL01, CP01, CP03, LT02, LT09, LT12
 capitalisation_policy = upper
 
 [sqlfluff:rules:capitalisation.functions]
-capitalisation_policy = upper
+extended_capitalisation_policy = upper
 
 [sqlfluff:indentation]
 tab_space_size = 4

@@ -3,18 +3,18 @@
 -- depends_on: {{ ref('l_courier_x_order') }}
 
 SELECT
-    cast(md5(
-        coalesce(a.order_id, '') || '||' ||
-        coalesce(a.user_id, '') || '||' ||
-        coalesce(b.retailer_id, '') || '||' ||
-        coalesce(c.courier_id, '')
+    CAST(MD5(
+        COALESCE(a.order_id, '') || '||' ||
+        COALESCE(a.user_id, '') || '||' ||
+        COALESCE(b.retailer_id, '') || '||' ||
+        COALESCE(c.courier_id, '')
     ) AS varchar)	                  AS bridge_link_id,
-    cast(a.order_id AS varchar)       AS order_id,
-    cast(a.user_id AS varchar)        AS user_id,
-    cast(b.retailer_id AS varchar)    AS retailer_id,
-    cast(c.courier_id AS varchar)     AS courier_id,
-    cast(now() AS timestamptz)		  AS mt_load_dttm,
-    cast('BUSINESS VAULT' AS varchar) AS mt_src_id
+    CAST(a.order_id AS varchar)       AS order_id,
+    CAST(a.user_id AS varchar)        AS user_id,
+    CAST(b.retailer_id AS varchar)    AS retailer_id,
+    CAST(c.courier_id AS varchar)     AS courier_id,
+    CAST(NOW() AS timestamptz)		  AS mt_load_dttm,
+    CAST('BUSINESS VAULT' AS varchar) AS mt_src_id
 FROM 
     {{ ref('l_user_x_order') }} 	AS a
 LEFT JOIN 

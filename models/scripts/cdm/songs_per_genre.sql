@@ -1,6 +1,6 @@
 SELECT 
     primary_genre,
-    cast(count(1) AS smallint) AS songs_count
+    CAST(COUNT(1) AS smallint) AS songs_count
 FROM 
     {{source('ods', 'songs')}}
 GROUP BY 
