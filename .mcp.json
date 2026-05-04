@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "dbt": {
+      "command": "uvx",
+      "args": [
+        "--env-file",
+        ".env.dbt-mcp",
+        "dbt-mcp"
+      ]
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_PAT}"
+      }
+    }
+  }
+}

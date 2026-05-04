@@ -1,7 +1,16 @@
-
 target/
 dbt_packages/
 logs/
-.pre-commit-config.yaml
 profiles.yml
 .user.yml
+.env.dbt-mcp
+.env.github-mcp
+PROJECT_REVIEW.md
+
+# Claude Code: личное и эфемерное
+.claude/settings.local.json
+.claude/projects/
+.claude/memory/
+.claude/todos/
+.claude/shell-snapshots/
+.claude/statsig/

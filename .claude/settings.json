@@ -1,0 +1,42 @@
+{
+    "hooks": {
+
+        "Notification" : [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "osascript -e 'display notification \"Claude ожидает подтверждения действия\" with title \"Claude Code\"'"
+                    }
+                ]
+            }
+        ],
+
+        "Stop" : [
+            {
+                "hooks": [{
+                    "type": "command",
+                    "command": "dbt parse || (echo 'Что-то не так, исправь перед завершением работы' >&2 && exit 2)"
+                }]
+            }
+        ]
+        
+    },
+
+    "permissions": {
+        "allow": [
+            "mcp__dbt__list",
+            "mcp__dbt__compile",
+            "mcp__dbt__show",
+            "mcp__dbt__parse",
+            "mcp__dbt__get_lineage_dev",
+            "mcp__dbt__get_node_details_dev",
+            "mcp__github__get_*",
+            "mcp__github__list_*",
+            "mcp__github__search_*"
+
+        ]   
+    }
+
+}
