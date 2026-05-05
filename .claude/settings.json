@@ -34,7 +34,8 @@
             "mcp__dbt__get_node_details_dev",
             "mcp__github__get_*",
             "mcp__github__list_*",
-            "mcp__github__search_*"
+            "mcp__github__search_*",
+            "mcp__dbt__test"
 
         ]   
     }

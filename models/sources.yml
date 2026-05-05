@@ -1,79 +1,12 @@
 version: 2
 
 sources:
-  - name: ods
-    description: 'Данные, которые поступают из Spotify'
-    loader: https://www.kaggle.com/datasets/alitaqishah/spotify-wrapped-2025-top-songs-and-artists
-    schema: ods
-    tables:
-    - name: songs
-      description: 'Топ-100 песен за все время'
-      config:
-        contract:
-          enforced: true
-      data_tests:
-        - unique_key: # проверяем модель на уникальность
-            arguments:
-              column_names : [
-                'alltime_rank',
-                'song_title',
-                'artist',
-                'total_streams_billions',
-                'primary_genre',
-                'bpm',
-                'release_year',
-                'artist_country',
-                'explicit',
-                'danceability',
-                'energy',
-                'valence'
-              ]
-      columns:
-        - name: alltime_rank
-          description: 'Ранг песни'
-          data_type: smallint
-        - name: song_title
-          description: 'Название песни'
-          data_type: varchar(100)
-          data_tests:
-            - not_null: # проверка поля на отсутствие NULL-значений
-                config:
-                  severity: error
-        - name: artist
-          description: 'Исполнитель'
-          data_type: varchar(100)
-        - name: total_streams_billions
-          description: 'Количество прослушиваний'
-          data_type: numeric(10, 2)
-        - name: primary_genre
-          description: 'Жанр'
-          data_type: varchar(100)
-        - name: bpm
-          description: 'BPM'
-          data_type: smallint
-        - name: release_year
-          description: 'Год выхода'
-          data_type: smallint
-        - name: artist_country
-          description: 'Национальность исполнителя'
-          data_type: varchar(55)
-        - name: explicit
-          description: 'Ненормативная лексика'
-          data_type: boolean
-        - name: danceability
-          description: 'Танцевальность, стабильность ритма'
-          data_type: numeric(10, 2)
-        - name: energy
-          description: 'Интенсивность'
-          data_type: numeric(10, 2)
-        - name: valence
-          description: 'Валентность'
-          data_type: numeric(10, 2)
-
+  # --- Источник 1 ---
   - name: instamart
     description: 'Данные по поездкам из Instamart'
     loader: Instamart
     schema: ods
+    freshness: null
     tables:
       - name: trips
         description: 'Данные по поездкам пользователей'
@@ -156,16 +89,20 @@ sources:
             description: 'Идентификатор типа события'
             data_type: smallint
 
-  # --- Источник 3 ---
+  # --- Источник 2 ---
   - name: 'paas_content_demand__mindbox'
     description: 'Сервис Mindbox'
     schema: paas_content_demand__mindbox
+    freshness:
+      warn_after: {count: 365, period: day}
+      error_after: {count: 720, period: day}
     tables:
       - name: spree_users
         description: 'Таблица с пользователями'
         config:
           contract:
             enforced: true
+          loaded_at_field: created_at
         columns:
           - name: crm_user_id
             description: 'ID пользователя'
@@ -197,6 +134,7 @@ sources:
         config:
           contract:
             enforced: true
+          loaded_at_field: order_shipped_dttm
         columns:
           - name: order_id
             description: 'ID заказа'
@@ -232,12 +170,16 @@ sources:
   - name: 'paas_content_demand__shopper'
     description: 'Сервис Shopper'
     schema: paas_content_demand__shopper
+    freshness:
+      warn_after: {count: 365, period: day}
+      error_after: {count: 720, period: day}
     tables:
       - name: spree_couriers
         description: 'Таблица с курьерами'
         config:
           contract:
             enforced: true
+          loaded_at_field: hired_at
         columns:
           - name: courier_id
             description: 'ID курьера'
@@ -267,6 +209,10 @@ sources:
         config:
           contract:
             enforced: true
+          freshness:
+            warn_after: {count: 365, period: day}
+            error_after: {count: 720, period: day}
+          loaded_at_field: started_at
         columns:
           - name: crm_subscription_id
             description: 'ID пользовательской подписки'
