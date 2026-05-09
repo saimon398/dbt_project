@@ -1,4 +1,4 @@
-name: DBT Project Workflow
+name: "CI: DBT Production Workflow"
 on:
   push:
     branches: [main]
@@ -10,6 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      DBT_ENV_SECRET_PROD_NAME: ${{ secrets.DBT_PROD_DB_NAME }}
+      DBT_ENV_SECRET_PROD_HOST: ${{ secrets.DBT_PROD_DB_HOST }}
+      DBT_ENV_SECRET_PROD_PASS: ${{ secrets.DBT_PROD_DB_PASS }}
+      DBT_ENV_SECRET_PROD_USER: ${{ secrets.DBT_PROD_DB_USER }}
 
     steps:
       - name: checkout repository code
@@ -29,13 +34,11 @@ jobs:
       - name: install dbt packages
         run: uv run dbt deps
 
+      - name: build dbt models
+        run: uv run dbt build --target prod
+
       - name: generate dbt docs
-        run: uv run dbt docs generate
-        env:
-          DBT_ENV_SECRET_NAME: ${{ secrets.DB_NAME }}
-          DBT_ENV_SECRET_HOST: ${{ secrets.DB_HOST }}
-          DBT_ENV_SECRET_PASS: ${{ secrets.DB_PASS }}
-          DBT_ENV_SECRET_USER: ${{ secrets.DB_USER }}
+        run: uv run dbt docs generate --target prod
 
       - name: prepare site
         run: |
