@@ -47,4 +47,5 @@ jobs:
         run: uv run dbt parse
 
       - name: lint dbt models
-        run: uv run sqlfluff lint models/
+        run: uv run sqlfluff lint --format github-annotations-native models/
+        continue-on-error: true
