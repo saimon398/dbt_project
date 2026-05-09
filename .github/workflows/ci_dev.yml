@@ -19,6 +19,11 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      DBT_ENV_SECRET_NAME: ${{ secrets.DB_NAME }}
+      DBT_ENV_SECRET_HOST: ${{ secrets.DB_HOST }}
+      DBT_ENV_SECRET_PASS: ${{ secrets.DB_PASS }}
+      DBT_ENV_SECRET_USER: ${{ secrets.DB_USER }}
 
     steps:
       - name: checkout repo
@@ -40,11 +45,6 @@ jobs:
 
       - name: parse dbt project
         run: uv run dbt parse
-        env:
-          DBT_ENV_SECRET_NAME: ${{ secrets.DB_NAME }}
-          DBT_ENV_SECRET_HOST: ${{ secrets.DB_HOST }}
-          DBT_ENV_SECRET_PASS: ${{ secrets.DB_PASS }}
-          DBT_ENV_SECRET_USER: ${{ secrets.DB_USER }}
 
       - name: lint dbt models
         run: uv run sqlfluff lint models/
