@@ -41,10 +41,10 @@ jobs:
       - name: parse dbt project
         run: uv run dbt parse
         env:
-          DBT_ENV_SECRET_PROD_NAME: ${{ secrets.DBT_PROD_DB_NAME }}
-          DBT_ENV_SECRET_PROD_HOST: ${{ secrets.DBT_PROD_DB_HOST }}
-          DBT_ENV_SECRET_PROD_PASS: ${{ secrets.DBT_PROD_DB_PASS }}
-          DBT_ENV_SECRET_PROD_USER: ${{ secrets.DBT_PROD_DB_USER }}
+          DBT_ENV_SECRET_NAME: ${{ secrets.DB_NAME }}
+          DBT_ENV_SECRET_HOST: ${{ secrets.DB_HOST }}
+          DBT_ENV_SECRET_PASS: ${{ secrets.DB_PASS }}
+          DBT_ENV_SECRET_USER: ${{ secrets.DB_USER }}
 
       - name: lint dbt models
         run: uv run sqlfluff lint models/
