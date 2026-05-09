@@ -9,4 +9,13 @@ dbt_project:
       threads: 4
       type: postgres
       user: "{{ env_var('DBT_ENV_SECRET_USER') }}"
+    prod:
+      dbname: "{{ env_var('DBT_ENV_SECRET_PROD_NAME') }}"
+      host: "{{ env_var('DBT_ENV_SECRET_PROD_HOST') }}"
+      pass: "{{ env_var('DBT_ENV_SECRET_PROD_PASS') }}"
+      port: 6432
+      schema: dbt_objects
+      threads: 4
+      type: postgres
+      user: "{{ env_var('DBT_ENV_SECRET_PROD_USER') }}"
   target: dev

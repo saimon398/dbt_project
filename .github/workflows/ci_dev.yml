@@ -1,0 +1,45 @@
+name: "CI: PR Validation Workflow"
+
+on:
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '.claude/**'
+      - '**.md'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v5
+      
+      - name: install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: install dependencies
+        run: uv sync --locked
+      
+      - name: prepare connection profile
+        run: cp profiles.example.yml profiles.yml
+
+      - name: install dbt packages
+        run: uv run dbt deps
+
+      - name: parse dbt project
+        run: uv run dbt parse
+
+      - name: lint dbt models
+        run: uv run sqlfluff lint models/

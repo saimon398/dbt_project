@@ -44,7 +44,7 @@ jobs:
           cp target/manifest.json data_catalog/
           cp target/catalog.json data_catalog/
 
-      - name: generage data catalog
+      - name: generate data catalog
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
