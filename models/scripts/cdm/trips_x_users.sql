@@ -22,3 +22,5 @@ INNER JOIN
     {{ source('instamart', 'users') }} AS users 
     ON 
         trips.user_id = users.id
+LIMIT 
+    1
