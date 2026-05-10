@@ -65,6 +65,7 @@ jobs:
         with:
           name: dbt-target-prod
           path: target/
+          if-no-files-found: error
           retention-days: 14
 
   publish-docs:

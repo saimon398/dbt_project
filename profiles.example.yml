@@ -5,7 +5,7 @@ dbt_project:
       host: "{{ env_var('DBT_ENV_SECRET_HOST') }}"
       pass: "{{ env_var('DBT_ENV_SECRET_PASS') }}"
       port: 6432
-      schema: dbt_objects
+      schema: "{{ env_var('DBT_SCHEMA', 'dbt_objects') }}"
       threads: 4
       type: postgres
       user: "{{ env_var('DBT_ENV_SECRET_USER') }}"

@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -18,12 +19,13 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     env:
       DBT_ENV_SECRET_NAME: ${{ secrets.DB_NAME }}
       DBT_ENV_SECRET_HOST: ${{ secrets.DB_HOST }}
       DBT_ENV_SECRET_PASS: ${{ secrets.DB_PASS }}
       DBT_ENV_SECRET_USER: ${{ secrets.DB_USER }}
+      DBT_SCHEMA: dbt_ci_pr_${{ github.event.pull_request.number }}
 
     steps:
       - name: checkout repo
@@ -43,8 +45,32 @@ jobs:
       - name: install dbt packages
         run: uv run dbt deps
 
-      - name: parse dbt project
-        run: uv run dbt parse
+      - name: download baseline artifacts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh run download \
+            --repo ${{ github.repository }} \
+            --name dbt-target-prod \
+            --dir baseline/ \
+            $(gh run list \
+              --repo ${{ github.repository }} \
+              --workflow cd.yaml \
+              --branch main \
+              --status success \
+              --limit 1 \
+              --json databaseId \
+              --jq '.[0].databaseId'
+            )
+
+      - name: build dbt modified models
+        run: |
+          uv run dbt build \
+            --select state:modified+ \
+            --target dev \
+            --state ./baseline \
+            --defer \
+            --full-refresh
 
       - name: lint dbt models
         run: uv run sqlfluff lint --format github-annotation-native models/
