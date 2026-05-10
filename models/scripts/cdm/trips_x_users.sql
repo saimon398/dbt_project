@@ -23,4 +23,4 @@ INNER JOIN
     ON 
         trips.user_id = users.id
 LIMIT 
-    1
+    5
