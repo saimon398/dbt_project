@@ -1,7 +1,7 @@
 dbt_project:
   outputs:
     dev:
-      dbname: "{{ env_var('DBT_ENV_SECRET_NAME') }}"
+      dbname: "{{ env_var(env_var('DBT_DBNAME'), 'DBT_ENV_SECRET_NAME') }}"
       host: "{{ env_var('DBT_ENV_SECRET_HOST') }}"
       pass: "{{ env_var('DBT_ENV_SECRET_PASS') }}"
       port: 6432

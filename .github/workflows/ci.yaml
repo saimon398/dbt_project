@@ -25,7 +25,8 @@ jobs:
       DBT_ENV_SECRET_HOST: ${{ secrets.DB_HOST }}
       DBT_ENV_SECRET_PASS: ${{ secrets.DB_PASS }}
       DBT_ENV_SECRET_USER: ${{ secrets.DB_USER }}
-      DBT_SCHEMA: dbt_ci_pr_${{ github.event.pull_request.number }}
+      DBT_SCHEMA: sandbox_pr_${{ github.event.pull_request.number }}
+      DBT_DBNAME: ${{ secrets.DBT_PROD_DB_NAME }}
 
     steps:
       - name: checkout repo
