@@ -66,7 +66,7 @@ jobs:
       - name: build dbt modified models
         run: |
           uv run dbt build \
-            --select state:modified+ \
+            --select state:modified.body+ state:modified.configs+ state:modified.macros+ \
             --target dev \
             --state ./baseline \
             --defer \
