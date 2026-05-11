@@ -1,0 +1,43 @@
+name: "Cleanup PR schemas"
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      DBT_ENV_SECRET_NAME: ${{ secrets.DB_NAME }}
+      DBT_ENV_SECRET_HOST: ${{ secrets.DB_HOST }}
+      DBT_ENV_SECRET_PASS: ${{ secrets.DB_PASS }}
+      DBT_ENV_SECRET_USER: ${{ secrets.DB_USER }}
+      DBT_SCHEMA: sandbox_pr_${{ github.event.pull_request.number }}
+      DBT_DBNAME: ${{ secrets.DBT_PROD_DB_NAME }}
+  
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v5
+
+      - name: install uv
+        uses: astral-sh/setup-uv@v6
+        with: 
+          enable-cache: true
+
+      - name: install dependencies
+        run: uv sync --locked
+
+      - name: prepare connection profile
+        run: cp profiles.example.yml profiles.yml
+
+      - name: install dbt packages
+        run: uv run dbt deps
+
+      - name: drop pr schema
+        run: uv run dbt run-operation drop_pr_schema --args "{schema_name: $DBT_SCHEMA}" --target dev

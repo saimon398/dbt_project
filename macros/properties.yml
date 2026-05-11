@@ -7,3 +7,5 @@ macros:
     description: Макрос выводит дату и время материализации модели
   - name: mt_valid_to_dttm
     description: Макрос выводит дату для SCD2
+  - name: drop_pr_schema
+    description: Макрос удаляет схему, которая была создана в рамках CI
