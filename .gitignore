@@ -5,7 +5,10 @@ profiles.yml
 .user.yml
 .env.dbt-mcp
 .env.github-mcp
+
+# Личные заметки по проекту
 PROJECT_REVIEW.md
+GOVERNANCE_GAPS.md
 
 # Claude Code: личное и эфемерное
 .claude/settings.local.json

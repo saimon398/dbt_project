@@ -40,4 +40,5 @@ jobs:
         run: uv run dbt deps
 
       - name: drop pr schema
-        run: uv run dbt run-operation drop_pr_schema --args "{schema_name: $DBT_SCHEMA}" --target dev
+        run: |
+          uv run dbt run-operation drop_pr_schema --args "{schema_name: $DBT_SCHEMA}" --target dev
