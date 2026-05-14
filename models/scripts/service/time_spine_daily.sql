@@ -8,5 +8,5 @@ WITH days AS (
   }}
 )
 
-SELECT cast(date_day AS date) AS date_day
+SELECT CAST(date_day AS date) AS date_day
 FROM days

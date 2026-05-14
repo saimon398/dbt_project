@@ -50,20 +50,20 @@ cte_active_couriers AS (
 )
 	
 SELECT 
-    cast(b.order_id AS varchar) 			  AS order_id,
-    cast(o.order_price AS numeric(10, 2))     AS order_price,
-    cast(o.order_created_dttm AS timestamptz) AS order_created_dttm,
-    cast(o.order_shipped_dttm AS timestamptz) AS order_shipped_dttm,
-    cast(o.shipment_type AS varchar)		  AS order_shipment_type,
-    cast(b.retailer_id AS varchar)		      AS retailer_id,
-    cast(r.retailer_name AS varchar)		  AS retailer_name,
-    cast(r.retailer_type AS varchar)		  AS retailer_type,
-    cast(b.user_id AS varchar) 			      AS user_id,
-    cast(u.user_first_name AS varchar)	      AS user_first_name,
-    cast(u.user_last_name AS varchar)	      AS user_last_name,
-    cast(u.user_email AS varchar)		      AS user_email,
-    cast(b.courier_id AS varchar)		      AS courier_id,
-    cast(c.courier_type AS varchar)     	  AS courier_type
+    CAST(b.order_id AS varchar) 			  AS order_id,
+    CAST(o.order_price AS numeric(10, 2))     AS order_price,
+    CAST(o.order_created_dttm AS timestamptz) AS order_created_dttm,
+    CAST(o.order_shipped_dttm AS timestamptz) AS order_shipped_dttm,
+    CAST(o.shipment_type AS varchar)		  AS order_shipment_type,
+    CAST(b.retailer_id AS varchar)		      AS retailer_id,
+    CAST(r.retailer_name AS varchar)		  AS retailer_name,
+    CAST(r.retailer_type AS varchar)		  AS retailer_type,
+    CAST(b.user_id AS varchar) 			      AS user_id,
+    CAST(u.user_first_name AS varchar)	      AS user_first_name,
+    CAST(u.user_last_name AS varchar)	      AS user_last_name,
+    CAST(u.user_email AS varchar)		      AS user_email,
+    CAST(b.courier_id AS varchar)		      AS courier_id,
+    CAST(c.courier_type AS varchar)     	  AS courier_type
 FROM 
     {{ ref('b_order_x_user_x_retailer_x_courier') }} AS b
 LEFT JOIN 
