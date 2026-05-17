@@ -1,6 +1,5 @@
 repos:
 -   repo: local
-    # 1. Проверка правил написания запросов для моделей
     hooks:
       -   id: sqlfluff-lint
           name: Проверка правил написания запросов для моделей
@@ -14,20 +13,4 @@ repos:
           language: system
           files: \.sql$
           args: ["--config", ".sqlfluff", "--force"]
-
-    # 2. Проверка стиля Python-кода
-      -   id: ruff-check
-          name: Проверка стиля Python-кода
-          entry: ruff check --fix
-          language: system
-          types_or: [python, pyi]
-          require_serial: true
-
-      -   id: ruff-format
-          name: Форматирование стиля Python-кода
-          entry: ruff format
-          language: system
-          types_or: [python, pyi]
-          require_serial: true
-
     

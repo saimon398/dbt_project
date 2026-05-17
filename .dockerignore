@@ -1,0 +1,32 @@
+# игнорируем личные заметки по проекту
+GOVERNANCE_GAPS.md
+PROJECT_REVIEW.md
+
+# игнорируем все, что связано с агентами
+.claude/
+CLAUDE.md
+.env*
+.mcp.json
+
+# игнорируем все, что связано с git
+.git
+.gitignore
+.github/
+
+# игнорируем dev-зависимости
+.pre-commit-config.yaml
+.sqlfluff*
+
+# docker-meta
+Dockerfile
+.dockerignore
+
+# остальное
+.venv/
+profiles.yml
+README.md
+target/
+logs/
+.user.yml
+dbt_packages/
+
