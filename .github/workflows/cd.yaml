@@ -44,6 +44,16 @@ jobs:
 
       - name: generate dbt docs
         run: uv run dbt docs generate --target prod
+      
+      - name: push manifest to s3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_STORAGE_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_STORAGE_SECRET_KEY }}
+          AWS_ENDPOINT_URL: https://storage.yandexcloud.net
+          AWS_REGION: ru-central1
+        run: |
+          aws s3 cp target/manifest.json s3://dbt-project-artifacts/prod/${{ github.sha }}.json \
+          aws s3 cp target/manifest.json s3://dbt-project-artifacts/prod/latest.json
 
       - name: prepare site
         run: |
