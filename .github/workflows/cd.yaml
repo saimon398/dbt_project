@@ -52,7 +52,7 @@ jobs:
           AWS_ENDPOINT_URL: https://storage.yandexcloud.net
           AWS_REGION: ru-central1
         run: |
-          aws s3 cp target/manifest.json s3://dbt-project-artifacts/prod/${{ github.sha }}.json \
+          aws s3 cp target/manifest.json s3://dbt-project-artifacts/prod/${{ github.sha }}.json
           aws s3 cp target/manifest.json s3://dbt-project-artifacts/prod/latest.json
 
       - name: prepare site
