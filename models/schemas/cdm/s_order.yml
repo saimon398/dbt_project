@@ -4,6 +4,7 @@ models:
   - name: s_order
     description: "{{ doc('s_order') }}"
     config:
+      tags: ['data_vault', 'satellite']
       materialized: scd_materialization
       hub_hash_key: 'order_id'
       on_schema_change: fail

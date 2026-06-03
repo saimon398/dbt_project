@@ -4,6 +4,7 @@ models:
   - name: s_courier
     description: "{{ doc('s_courier') }}"
     config:
+      tags: ['data_vault', 'satellite']
       materialized: scd_materialization
       hub_hash_key: 'courier_id'
       on_schema_change: fail

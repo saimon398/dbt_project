@@ -6,7 +6,7 @@ models:
     config:
       materialized: incremental
       on_schema_change: fail
-      tags: ['business_vault', 'bridge']
+      tags: ['data_vault', 'bridge']
       contract:
         enforced: true
     columns:

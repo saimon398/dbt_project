@@ -4,6 +4,7 @@ models:
   - name: l_courier_x_order
     description: "{{ doc('l_courier_x_order') }}"
     config:
+      tags: ['data_vault', 'link']
       materialized: incremental
       on_schema_change: fail
       contract:
